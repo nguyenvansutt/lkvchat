@@ -18,29 +18,27 @@ namespace lkvChat
         [STAThread]
         static void Main()
         {
+        
             chat chatserv = new chat();            
             Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-           
-            var main = new MainForm();
+            Application.SetCompatibleTextRenderingDefault(false);                       
             
-            main.ShowDialog();
-
-            if (main.user == null)
+            var main = new MainForm();
+            login loginform = new login();
+            var result = loginform.ShowDialog();
+            if (result == DialogResult.OK)
             {
-                login loginfrom = new login();
-                var result = loginfrom.ShowDialog();
-                if (result == DialogResult.OK)
+                
+                if (loginform.user.status)
                 {
-                    main.user = loginfrom.user;
-                    if (main.user.status)
-                    {
-                        Conversation conversation = new Conversation();
-                        conversation.ShowDialog();
-                    }
+                    main.loadData(loginform.user);
+                    main.ShowDialog();
                 }
             }
-            
+
+           
+
+           
             
         }
     }

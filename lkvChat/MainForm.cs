@@ -18,9 +18,22 @@ namespace lkvChat
             InitializeComponent();
             
         }
+        public void loadData(user userlogin)
+        {
+            this.user = userlogin;
+            chat chatserv = new chat();
 
+            try
+            {
+                chatserv.getListChat("http://support.ekecompany.com/index.php", this.user, this.user.username, this.user.pass);
+                
 
+            }
+            catch (Exception exception)
+            {
 
+            }
+        }
 
     }
 }
